@@ -1,0 +1,22 @@
+{
+  "name": "webscraper",
+  "engines": {
+    "node" : ">=4.0.0"
+  },
+  "version": "1.0.0",
+  "description": "webscraper of product listing lage",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**/*.spec.js"
+  },
+  "author": "Chris Matheson (http://www.github.com/chrismatheson)",
+  "license": "ISC",
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "cheerio": "^0.20.0"
+  }
+}
