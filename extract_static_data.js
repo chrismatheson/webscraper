@@ -13,23 +13,11 @@ function consume(html) {
     return {
       title: $('h3', singleProduct).text(),
       size: productHtml.then(html => html.length),
-      description: productHtml.then(html => $('#information .access', html).text()),
+      description: productHtml.then(html => $('#information productcontent div', html).eq(0).text()),
       unit_price: $('.pricePerUnit', singleProduct).text()
     };
-  });
+  }).map(waitForAsyncThings);
 }
 
-function parsePrice(unclean) {
-  return parseFloat(unclean.match(/[\d\.]+/g)[0]);
-}
 
-function inlineParsePrice(data) {
-  data.unit_price = parsePrice(data.unit_price);
-  return data;
-}
-
-module.exports = function (html) {
-  return consume(html)
-    .map(waitForAsyncThings)
-    .map(inlineParsePrice);
-}
+module.exports = consume;

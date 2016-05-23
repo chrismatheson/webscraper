@@ -63,7 +63,7 @@ describe('extract_satatic_data', function () {
     });
 
     it('should contain the product price', function () {
-      expect(data[0].unit_price).to.be(3.5);
+      expect(data[0].unit_price).to.match(/£3.50/);
     });
   });
 
