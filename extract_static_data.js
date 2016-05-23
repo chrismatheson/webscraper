@@ -1,18 +1,20 @@
 const Promise = require('bluebird');
-const cheerio = require('cheerio'); //jQuery-esqe library, should be easy for most to grok.
-const sumurise_links = function () {
-  return Promise.resolve({ size: 34.6, description: 'something'});
-}
+const $ = require('cheerio'); //jQuery-esqe library, should be easy for most to grok.
+const get = require('./get');
 
 function consume(html) {
-  const $ = cheerio.load(html);
-  return $('.product').map(function (i, singleProduct) {
+  return $('.product', html).toArray().map(function (singleProduct) {
+
+    const productLink = $(singleProduct).find('h3 a').attr('href');
+    const productHtml = get(productLink);
+
     return {
       title: $(singleProduct).find('h3').text(),
-      productLink: $(singleProduct).find('h3 a').attr('href'),
+      size: productHtml.then(html => html.length),
+      description: productHtml.then($.load).then($ => $(this).find('#information .access').text()),
       unit_price: $(singleProduct).find('.pricePerUnit').text()
     };
-  }).toArray();
+  });
 }
 
 function parsePrice(unclean) {
