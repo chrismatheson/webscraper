@@ -13,7 +13,7 @@ function consume(html) {
     return {
       title: $('h3', singleProduct).text(),
       size: productHtml.then(html => html.length),
-      description: productHtml.then(html => $('#information productcontent div', html).eq(0).text()),
+      description: productHtml.then(html => $('#information productcontent div', html).eq(0).text()), //There is a better selector for this but i cant think of it just now
       unit_price: $('.pricePerUnit', singleProduct).text()
     };
   }).map(waitForAsyncThings);
