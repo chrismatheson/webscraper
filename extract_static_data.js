@@ -8,12 +8,12 @@ function consume(html) {
     const productLink = $(singleProduct).find('h3 a').attr('href');
     const productHtml = get(productLink);
 
-    return {
+    return Promise.props({
       title: $(singleProduct).find('h3').text(),
       size: productHtml.then(html => html.length),
       description: productHtml.then($.load).then($ => $(this).find('#information .access').text()),
       unit_price: $(singleProduct).find('.pricePerUnit').text()
-    };
+    });
   });
 }
 
