@@ -11,10 +11,10 @@ function consume(html) {
     const productHtml = get(productLink);
 
     return {
-      title: $(singleProduct).find('h3').text(),
+      title: $('h3', singleProduct).text(),
       size: productHtml.then(html => html.length),
-      description: productHtml.then($.load).then($ => $(this).find('#information .access').text()),
-      unit_price: $(singleProduct).find('.pricePerUnit').text()
+      description: productHtml.then(html => $('#information .access', html).text()),
+      unit_price: $('.pricePerUnit', singleProduct).text()
     };
   });
 }
