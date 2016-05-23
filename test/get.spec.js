@@ -1,8 +1,8 @@
 const expect = require('expect.js');
-const scrapper = require('../index');
+const get = require('../get');
 
 describe('webscraper', function () {
   it('should fetch some data', function () {
-    return scrapper().then(data => expect(data).to.match(/\<html/));
+    return get('http://www.google.com').then(data => expect(data).to.match(/\<html/i));
   });
 });
