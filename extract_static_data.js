@@ -3,7 +3,7 @@ const $ = require('cheerio'); //jQuery-esqe library, should be easy for most to 
 const get = require('./get');
 
 function consume(html) {
-  return $('.product', html).toArray().map(function (singleProduct) {
+  return Promise.map($('.product', html).toArray(), function (singleProduct) {
 
     const productLink = $(singleProduct).find('h3 a').attr('href');
     const productHtml = get(productLink);

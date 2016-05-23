@@ -37,14 +37,21 @@ const singleProduct = `
 `
 
 describe('extract_satatic_data', function () {
-  it('should find nothing', function () {
-    expect(extract(noProducts).length).to.be(0);
+  describe('when there is a single product', function () {
+    var data = null;
+    beforeEach(function () {
+      return extract(noProducts).then(res => data = res);
+    });
+
+    it('should find nothing', function () {
+      expect(data.length).to.be(0);
+    });
   });
 
   describe('when there is a single product', function () {
     var data = null;
     beforeEach(function () {
-      data = extract(singleProduct);
+      return extract(singleProduct).then(res => data = res);
     });
 
     it('should find a single product fragment', function () {
