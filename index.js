@@ -8,6 +8,7 @@ get(URL)
   .then(extract)
   .map(function (result) {
     result.unit_price = transform.parsePrice(result.unit_price);
+    result.size = transform.formatAsKilloBytes(result.size);
     result.title = transform.trimWhiteSpace(result.title);
     result.description = transform.trimWhiteSpace(result.description);
     return result;
