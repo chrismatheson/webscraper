@@ -14,3 +14,7 @@ npm run start
 
 `npm run test`
 
+
+##Know issues / improvements
+
+- follow redirects

@@ -1,12 +1,13 @@
 {
   "name": "webscraper",
   "engines": {
-    "node" : ">=4.0.0"
+    "node": ">=4.0.0"
   },
   "version": "1.0.0",
   "description": "webscraper of product listing lage",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha test/**/*.spec.js"
   },
   "author": "Chris Matheson (http://www.github.com/chrismatheson)",
