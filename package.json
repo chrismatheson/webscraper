@@ -1,7 +1,7 @@
 {
   "name": "webscraper",
   "engines": {
-    "node": ">=4.0.0"
+    "node": "4.3.1"
   },
   "version": "1.0.0",
   "description": "webscraper of product listing lage",
