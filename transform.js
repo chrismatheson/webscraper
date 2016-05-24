@@ -5,6 +5,7 @@ function parsePrice(unclean) {
 function sumarise(summary, next) {
   summary.results.push(next);
   summary.total += next.unit_price;
+  summary.total = (Math.round(summary.total * 100) * 0.01) //correct JS rounding errors
   return summary;
 }
 

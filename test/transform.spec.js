@@ -35,7 +35,12 @@ describe('transform', function () {
     });
   });
 
-  describe('sumarise', function () {});
+  describe('sumarise', function () {
+    it('should avoid rounding errors', function () {
+      const summary = [{unit_price:0.2},{unit_price:0.1}].reduce(transform.sumarise, {results: [], total:0});
+      expect(summary.total).to.be(0.3);
+    });
+  });
 
   describe('formatAsKilloBytes', function () {});
 
