@@ -4,17 +4,39 @@ const get = require('./get');
 
 const waitForAsyncThings = Promise.props;
 
-function consume(html) {
-  return Promise.map($('.product', html).toArray(), function (singleProduct) {
+function sizeOf(eventualHtml) {
+  return eventualHtml.then(text => text.length);
+}
 
-    const productLink = $(singleProduct).find('h3 a').attr('href');
-    const productHtml = get(productLink);
+function descriptionFrom(eventualHtml) {
+  return eventualHtml.then(html => $(html).find('#information productcontent div').eq(0).text())
+}
+
+function titleFrom(html) {
+  return $(html).find('h3').text();
+}
+
+function priceFrom(html) {
+  return $(html).find('.pricePerUnit').text()
+}
+
+function productsFrom(html) {
+  return $(html).find('.product').toArray()
+}
+
+function productLinkFrom(html) {
+  return $(html).find('h3 a').attr('href')
+}
+
+function consume(html) {
+  return Promise.map(productsFrom(html), function (singleProduct) {
+    const productHtml = get(productLinkFrom(singleProduct));
 
     return {
-      title: $('h3', singleProduct).text(),
-      size: productHtml.then(html => html.length),
-      description: productHtml.then(html => $('#information productcontent div', html).eq(0).text()), //There is a better selector for this but i cant think of it just now
-      unit_price: $('.pricePerUnit', singleProduct).text()
+      title: titleFrom(singleProduct),
+      size: sizeOf(productHtml),
+      description: descriptionFrom(productHtml), //There is a better selector for this but i cant think of it just now
+      unit_price: priceFrom(singleProduct)
     };
   }).map(waitForAsyncThings);
 }
